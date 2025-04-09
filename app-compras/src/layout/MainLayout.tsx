@@ -1,4 +1,3 @@
-// MainLayout.tsx
 import { useState } from "react";
 import {
   AppBar,
@@ -23,7 +22,9 @@ import HomeIcon from "@mui/icons-material/Home";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import CategoryIcon from "@mui/icons-material/Category";
 import PeopleIcon from "@mui/icons-material/People";
+import PublicIcon from "@mui/icons-material/Public";
 import LogoutIcon from "@mui/icons-material/Logout";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate, Link } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -38,6 +39,8 @@ const menuItems = [
   { text: "Unidades", icon: <CategoryIcon />, path: "/unidades" },
   { text: "Marcas", icon: <CategoryIcon />, path: "/marcas" },
   { text: "Familias", icon: <PeopleIcon />, path: "/familias" },
+  { text: "Países", icon: <PublicIcon />, path: "/paises" },
+  { text: "Compras", icon: <InventoryIcon />, path: "/compras" },
 ];
 
 export default function MainLayout({ children }: Props) {
@@ -82,7 +85,7 @@ export default function MainLayout({ children }: Props) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" sx={{ zIndex: theme.zIndex.drawer + 1 }}>
+      <AppBar position="fixed" sx={{ zIndex: theme.zIndex.drawer + 1, background: "#2c387e" }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -93,13 +96,13 @@ export default function MainLayout({ children }: Props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
-             Compras
+            Sistema de Compras
           </Typography>
           <Typography variant="body2" sx={{ mr: 2 }}>
             Usuario: {usuario?.nombre || "Invitado"}
           </Typography>
           <Button color="inherit" onClick={handleLogout} startIcon={<LogoutIcon />}>
-            Salir
+            Cerrar sesión
           </Button>
         </Toolbar>
       </AppBar>

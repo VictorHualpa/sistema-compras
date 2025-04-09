@@ -7,14 +7,19 @@ export default function InputField(props: TextFieldProps) {
       size="small"
       margin="dense"
       fullWidth
+      InputLabelProps={{
+        shrink: props.type === "date" || props.InputLabelProps?.shrink,
+      }}
       sx={{
         '& .MuiInputBase-input': {
-          padding: '6px 6px',
+          padding: '8px 10px',
+        },
+        '& .MuiFormHelperText-root': {
+          marginLeft: 0,
+          marginTop: '4px',
         },
       }}
-      {...props} // permite sobrescribir si necesitas algo diferente
+      {...props}
     />
   );
 }
-
- 

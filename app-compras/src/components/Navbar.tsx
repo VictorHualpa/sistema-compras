@@ -48,7 +48,6 @@ export default function Navbar() {
         <Button color="inherit" component={Link} to="/unidades">
           Unidades de Medida
         </Button>
-        
 
         <Box ml={2}>
           <Typography variant="body2">
