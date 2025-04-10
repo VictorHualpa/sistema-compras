@@ -1,8 +1,22 @@
-// compra.types.ts
+export interface Producto {
+  id: number;
+  nombre: string;
+  descripcion?: string;
+  precio: number;
+}
+
 export interface CompraDetalle {
-  producto_id: number;
+  cod_producto: string;
+  descripcion_producto?: string;
   cantidad: number;
   precio_unitario: number;
+}
+
+export interface CompraCabecera {
+  cod_proveedor: string;
+  num_documento: string;
+  fec_emision: string;
+  fec_entrega: string;
 }
 
 export interface Compra {
@@ -13,9 +27,4 @@ export interface Compra {
   usuario_crea: string;
   fch_crea: string | null;
   detalles: CompraDetalle[];
-}
-
-export interface Producto {
-  id: number;
-  nombre: string;
 }

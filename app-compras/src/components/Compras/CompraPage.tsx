@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 import { getCompras } from "../../api/compraApi";
 import CompraForm from "./CompraForm";
+import CompraTabla from "./CompraTabla";
+import { Compra } from "./compra.types";
+import { Box, Typography } from "@mui/material";
+ 
 
-export default function ComprasPage() {
-  const [compras, setCompras] = useState([]);
+
+export default function CompraPage() {
+  const [compras, setCompras] = useState<Compra[]>([]);
 
   const cargarCompras = () => {
     getCompras().then(data => setCompras(data));
@@ -14,16 +19,10 @@ export default function ComprasPage() {
   }, []);
 
   return (
-    <div style={{ padding: 20 }}>
+    <Box sx={{ p: 2 }}>
       <CompraForm onCompraRegistrada={cargarCompras} />
-      <h2>Compras registradas</h2>
-      <ul>
-        {compras.map((compra: any) => (
-          <li key={compra.id}>
-            N° Doc: {compra.num_documento} — Fecha: {compra.fec_emision}
-          </li>
-        ))}
-      </ul>
-    </div>
+      <Typography variant="h6" mt={4} mb={2}>Compras registradas</Typography>
+      <CompraTabla compras={compras} />
+    </Box>
   );
 }

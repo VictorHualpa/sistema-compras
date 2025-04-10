@@ -3,13 +3,22 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import SearchIcon from "@mui/icons-material/Search";
 import ProductoModal from "./ProductoModal";
 import { useState } from "react";
+import { CompraDetalle, Producto } from "./compra.types";
 
-export default function CompraDetalleRow({ item, index, onChange, onRemove }: any) {
+interface Props {
+  item: CompraDetalle;
+  index: number;
+  onChange: (index: number, field: string, value: any) => void;
+  onRemove: (index: number) => void;
+}
+
+export default function CompraDetalleRow({ item, index, onChange, onRemove }: Props) {
   const [openModal, setOpenModal] = useState(false);
 
-  const handleSelectProducto = (producto: any) => {
-    onChange(index, "cod_producto", producto.id);
-    onChange(index, "descripcion_producto", producto.descripcion);
+  const handleSelectProducto = (producto: Producto) => {
+    onChange(index, "cod_producto", producto.id.toString());
+    onChange(index, "descripcion_producto", producto.descripcion || "");
+    setOpenModal(false);
   };
 
   return (
@@ -34,8 +43,7 @@ export default function CompraDetalleRow({ item, index, onChange, onRemove }: an
             size="small"
             name="descripcion_producto"
             value={item.descripcion_producto || ""}
-            label="Descripción"
-            InputProps={{ readOnly: true }}
+            disabled
             fullWidth
           />
         </TableCell>
@@ -46,7 +54,7 @@ export default function CompraDetalleRow({ item, index, onChange, onRemove }: an
             name="cantidad"
             value={item.cantidad}
             onChange={(e) => onChange(index, "cantidad", e.target.value)}
-            label="Cantidad"
+            fullWidth
           />
         </TableCell>
         <TableCell>
@@ -56,11 +64,8 @@ export default function CompraDetalleRow({ item, index, onChange, onRemove }: an
             name="precio_unitario"
             value={item.precio_unitario}
             onChange={(e) => onChange(index, "precio_unitario", e.target.value)}
-            label="Precio"
+            fullWidth
           />
-        </TableCell>
-        <TableCell>
-          {(item.cantidad * item.precio_unitario).toFixed(2)}
         </TableCell>
         <TableCell>
           <IconButton color="error" onClick={() => onRemove(index)}>
@@ -69,11 +74,7 @@ export default function CompraDetalleRow({ item, index, onChange, onRemove }: an
         </TableCell>
       </TableRow>
 
-      <ProductoModal
-        open={openModal}
-        onClose={() => setOpenModal(false)}
-        onSelect={handleSelectProducto}
-      />
+      <ProductoModal open={openModal} onClose={() => setOpenModal(false)} onSelect={handleSelectProducto} />
     </>
   );
 }
