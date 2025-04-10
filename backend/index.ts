@@ -11,6 +11,7 @@ import marcaRoutes from "./routes/marcaRoutes";
 import familiaRoutes from "./routes/familiaRoutes";
 import paisRoutes from "./routes/paisRoutes";
 import compraRoutes from "./routes/compraRoutes";
+import proveedorRoutes from "./routes/proveedorRoutes";
 
 dotenv.config();
 
@@ -29,7 +30,7 @@ app.use("/api/marcas", marcaRoutes);
 app.use("/api/familias", familiaRoutes);
 app.use("/api/pais", paisRoutes);
 app.use("/api/compras", compraRoutes);
-
+app.use("/api/proveedores", proveedorRoutes);
 
 // Servidor
 const PORT = process.env.PORT || 5000;

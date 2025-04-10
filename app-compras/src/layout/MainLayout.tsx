@@ -41,6 +41,9 @@ const menuItems = [
   { text: "Familias", icon: <PeopleIcon />, path: "/familias" },
   { text: "Países", icon: <PublicIcon />, path: "/paises" },
   { text: "Compras", icon: <InventoryIcon />, path: "/compras" },
+  { text: "Proveedores", icon: <PeopleIcon />, path: "/proveedores" },
+
+  
 ];
 
 export default function MainLayout({ children }: Props) {

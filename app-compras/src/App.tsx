@@ -8,7 +8,8 @@ import MarcaPage from "./components/Marca/MarcaPage";
 import FamiliaPage from "./components/Familia/FamiliaPage";
 import PaisPage from "./components/Pais/PaisPage"; 
 import ComprasPage from "./components/Compras/CompraPage"; 
- 
+import ProveedorPage from "./components/Proveedor/ProveedorPage"; // Asegúrate que la ruta del archivo es correcta
+
 
 
 function App() {
@@ -91,6 +92,18 @@ function App() {
       />
 
 
+<Route
+        path="/proveedores"
+        element={token ? (
+          <MainLayout>
+            <ProveedorPage />
+          </MainLayout>
+        ) : (
+          <Navigate to="/" replace />
+        )}
+      />
+
+ 
       </Routes>
   );
 }

@@ -84,7 +84,7 @@ export default function CompraForm({ onCompraRegistrada }: Props) {
         fieldErrors[path] = e.message;
       });
       setErrors(fieldErrors);
-      console.error("Errores de validación:", validation.error.format());
+      //console.error("Errores de validación:", validation.error.format());
       showSnackbar("Corrige los errores del formulario", "error");
       return;
     }
@@ -98,13 +98,13 @@ export default function CompraForm({ onCompraRegistrada }: Props) {
         detalle,
       };
 
-      console.log("🟡 Enviando a backend:", JSON.stringify(data, null, 2));
+      //console.log("🟡 Enviando a backend:", JSON.stringify(data, null, 2));
 
       await createCompra(data);
       showSnackbar("Compra registrada con éxito", "success");
       onCompraRegistrada();
     } catch (error) {
-      console.error("Error al registrar la compra:", error);
+      //console.error("Error al registrar la compra:", error);
       showSnackbar("Error al registrar la compra", "error");
     }
   };
