@@ -1,6 +1,6 @@
 import { Familia } from "../components/Familia/familia.types";
  
-const API_URL = 'http://192.168.1.49:5000/api/familias';
+const API_URL = 'http://192.168.39.137:5000/api/familias';
 
 export const obtenerFamilias = async (): Promise<Familia[]> => {
   const token = localStorage.getItem("token");

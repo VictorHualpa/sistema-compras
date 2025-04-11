@@ -1,6 +1,6 @@
 import { Pais } from "../components/Pais/pais.types";
 
-const API_URL = "http://192.168.1.49:5000/api/pais";
+const API_URL = "http://192.168.39.137:5000/api/pais";
 
 const headers = () => ({
   Authorization: `Bearer ${localStorage.getItem("token")}`,

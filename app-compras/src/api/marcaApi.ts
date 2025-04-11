@@ -1,5 +1,5 @@
 import { Marca } from "../components/Marca/marca.types";
-const API_URL = 'http://192.168.1.49:5000/api/marcas';
+const API_URL = 'http://192.168.39.137:5000/api/marcas';
 
 export const obtenerMarcas = async (): Promise<Marca[]> => {
   const res = await fetch(API_URL);

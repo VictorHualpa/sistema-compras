@@ -1,4 +1,4 @@
-const API_URL = 'http://192.168.1.49:5000/api/productos';
+const API_URL = 'http://192.168.39.137:5000/api/productos';
 
 export const obtenerProductos = async () => {
   const res = await fetch(API_URL);

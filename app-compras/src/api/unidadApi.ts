@@ -1,5 +1,5 @@
 import { Unidad } from "../components/Unidades/unidad.types";
-const API_URL = "http://192.168.1.49:5000/api/unidades";
+const API_URL = "http://192.168.39.137:5000/api/unidades";
 
 export const obtenerUnidades = async (): Promise<Unidad[]> => {
   const res = await fetch(API_URL);

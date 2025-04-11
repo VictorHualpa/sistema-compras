@@ -47,7 +47,7 @@ export default function ProveedorForm({ proveedor, onSave }: Props) {
       showSnackbar("Corrige los errores del formulario", "error");
       return;
     }
-
+  
     try {
       const usuario = JSON.parse(localStorage.getItem("usuario") || "{}");
       const payload = {
@@ -55,7 +55,7 @@ export default function ProveedorForm({ proveedor, onSave }: Props) {
         cod_usuario_c: usuario.id || 1,
         cod_usuario_m: usuario.id || 1,
       };
-
+  
       if (formData.id) {
         await updateProveedor(formData.id, payload);
         showSnackbar("Proveedor actualizado con éxito", "success");
@@ -63,15 +63,41 @@ export default function ProveedorForm({ proveedor, onSave }: Props) {
         await createProveedor(payload);
         showSnackbar("Proveedor creado con éxito", "success");
       }
-
+  
       onSave();
       setFormData(initialState);
       setErrors({});
-    } catch (error: any) {
-      const msg = error?.message || "Error al guardar proveedor";
+    } 
+    catch (error: any) {
+      const msg = error?.mensaje || "Error al guardar proveedor";
+    
+      // ✅ Manejo de errores por campo desde el backend
+      if (error.errores) {
+        setErrors(error.errores);
+      } else if (msg.toLowerCase().includes("ruc")) {
+        setErrors({ ruc: msg });
+      }
+    
       showSnackbar(msg, "error");
     }
+    
+    /*
+    catch (error: any) {
+      const msg = error?.message || "Error al guardar proveedor";
+  
+      // ✅ Extrae errores personalizados del backend si existen
+      if (error.response && error.response.errores) {
+        setErrors(error.response.errores); // <- mostrar en los campos directamente
+      } else if (msg.toLowerCase().includes("ruc")) {
+        setErrors({ ruc: msg });
+      }
+  
+      showSnackbar(msg, "error");
+    }
+*/
+
   };
+  
 
   return (
     <Box component="form" noValidate>

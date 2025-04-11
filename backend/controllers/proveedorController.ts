@@ -28,14 +28,30 @@ export const obtener = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-// ✅ Crear
 export const crear = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { ruc } = req.body;
-    const yaExiste = await ProveedorModel.existeRuc(ruc);
+    const { ruc, telefono } = req.body;
 
+    const errores: Record<string, string> = {};
+
+    // Validación de RUC duplicado
+    const yaExiste = await ProveedorModel.existeRuc(ruc);
     if (yaExiste) {
-      res.status(400).json({ mensaje: "RUC ya está registrado" });
+      errores.ruc = "Este RUC ya fue registrado";
+    }
+
+    // Validación de teléfono: debe tener exactamente 9 dígitos
+    const telefonoRegex = /^\d{9}$/;
+    if (!telefonoRegex.test(telefono)) {
+      errores.telefono = "El teléfono debe tener exactamente 9 dígitos";
+    }
+
+    // Si hay errores, los retornamos al frontend
+    if (Object.keys(errores).length > 0) {
+      res.status(400).json({
+        mensaje: "Error de validación",
+        errores,
+      });
       return;
     }
 
@@ -46,6 +62,10 @@ export const crear = async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({ mensaje: "Error al registrar proveedor", error });
   }
 };
+
+
+
+
 
 // ✅ Actualizar
 export const actualizar = async (req: Request, res: Response): Promise<void> => {

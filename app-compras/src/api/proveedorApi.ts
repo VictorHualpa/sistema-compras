@@ -1,4 +1,4 @@
-const API_URL = "http://192.168.1.49:5000/api/proveedores";
+const API_URL = "http://192.168.39.137:5000/api/proveedores";
 
 const getToken = () => localStorage.getItem("token") || "";
 
@@ -19,6 +19,7 @@ export const getProveedorById = async (id: number) => {
   });
   return await res.json();
 };
+
 export const createProveedor = async (data: any) => {
   console.log("📤 Enviando POST a:", API_URL);
   console.log("📤 Datos:", data);
@@ -34,61 +35,17 @@ export const createProveedor = async (data: any) => {
 
   console.log("📥 Respuesta de backend:", res);
 
+  const body = await res.json();
+
   if (!res.ok) {
-    const body = await res.json();
     console.error("❌ Error del backend:", body);
-    throw new Error(body.mensaje || "Error al registrar proveedor");
+    throw body; // ✅ Lanza el objeto completo con errores y mensaje
   }
 
-  const resultado = await res.json();
-  console.log("✅ Resultado JSON:", resultado);
-  return resultado;
+  console.log("✅ Resultado JSON:", body);
+  return body;
 };
 
-
-/*
-export const createProveedor = async (data: any) => {
-  const res = await fetch(API_URL, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${getToken()}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-
-  // Intenta leer el cuerpo de respuesta si existe
-  const responseBody = await res
-    .json()
-    .catch(() => ({ mensaje: "Proveedor creado pero sin cuerpo de respuesta" }));
-
-  if (!res.ok) {
-    throw new Error(responseBody?.mensaje || "Error al registrar proveedor");
-  }
-
-  return responseBody;
-};
-*/
-/*
-export const createProveedor = async (data: any) => {
-  const res = await fetch(API_URL, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${getToken()}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-
-  if (!res.ok) {
-    const errorData = await res.json().catch(() => ({}));
-    const mensaje = errorData.mensaje || "Error al registrar proveedor";
-    throw new Error(mensaje);
-  }
-
-  return await res.json();
-};
-*/
 
 export const updateProveedor = async (id: number, data: any) => {
   const token = localStorage.getItem("token");
